@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../stylesheets/profile.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <title>Document</title>
+    <% if (user.username==='Arun' ) { %>
+        <style>
+            .header-wrapper {
+                background-color: #6393f2;
+            }
+        </style>
+        <% } else if (user.username==='Bara12' ) { %>
+            <style>
+                .header-wrapper {
+                    background-color: green;
+                }
+            </style>
+            <% } else { %>
+                <style>
+                    .header-wrapper {
+                        background-color: gray;
+                        /* Default color */
+                    }
+                </style>
+                <% } %>
+
+</head>
+
+<body>
+    <div class="header-wrapper">
+        <header>
+            <div class="container">
+                <div class="profile">
+                    <div class="profile-image">
+                        <img src="https://images.unsplash.com/photo-1513721032312-6a18a42c8763?w=152&h=152&fit=crop&crop=faces"
+                            alt="">
+                    </div>
+
+                    <div class="profile-user-settings">
+                        <h1 class="profile-user-name">
+                            <%= user.fullname %>
+                        </h1>
+                        <button class="btn profile-edit-btn">Edit Profile</button>
+                        <button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog"
+                                aria-hidden="true"></i></button>
+                    </div>
+                    <div class="logout-button">
+                        <a href="/logout">Logout</a>
+                    </div>
+                    <div class="profile-stats">
+                        <ul>
+                            <li><span class="profile-stat-count">6</span> posts</li>
+                            <li><span class="profile-stat-count">188</span> followers</li>
+                            <li><span class="profile-stat-count">206</span> following</li>
+                        </ul>
+                    </div>
+                    <div class="profile-bio">
+                        <p><span class="profile-real-name">
+                                <%= user.username %>
+                            </span></p>
+                    </div>
+                    <form action="/upload" method="post" enctype="multipart/form-data">
+                        <input type="file" name="file">
+                        <input type="text" name="postCaption">
+                        <!-- <button type="submit">Upload</button> -->
+                        <input type="submit" value="Upload">
+                    </form>
+
+                </div>
+                <div class="bio">
+                    <p><b><i>Bio:</i></b> Passionate Photographer 📷✈️🏕️</p>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <main>
+        <div class="container">
+            <div class="gallery"><% user.posts.forEach(function(post){%>
+                <div class="gallery-item" tabindex="0">
+                    <a href="/image/<%= post.image %>" target="_blank"> <!-- Link to the new route -->
+                        <img src="/images/uploads/<%= post.image %>"
+                            class="gallery-image" alt="Image">
+                    </a>
+                        <h5 class="post-text"><%= post.text%></h5>
+                </div>
+            <% }) %></div>
+            <!-- End of gallery -->
+
+            <!-- <div class="loader"></div> -->
+        </div>
+        <!-- End of container -->
+    </main>
+
+</body>
+
+</html>
