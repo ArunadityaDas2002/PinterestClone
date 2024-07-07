@@ -32,7 +32,7 @@ Install dependencies:
 npm install
 
 Create a .env file in the root directory and add your MongoDB URI and session secret:
-MONGODB_URI=your_mongodb_uri
+MONGODB_URI=your_mongodb_uri /n
 SESSION_SECRET=your_session_secret
 
 ## Start the application:
